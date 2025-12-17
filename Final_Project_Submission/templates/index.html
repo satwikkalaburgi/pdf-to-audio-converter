@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Audio Converter</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="background-animation"></div>
+
+    <div class="container">
+        <header>
+            <h1 id="app-title">PDF to Audio Converter</h1>
+            <p id="app-subtitle" class="subtitle">Transform your documents into speech instantly.</p>
+        </header>
+
+        <main class="card glass-effect">
+            <form id="upload-form">
+
+                <!-- Language Selection -->
+                <div class="form-group">
+                    <label for="language-select" id="lang-label">Select Language</label>
+                    <div class="select-wrapper">
+                        <select id="language-select" name="language">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi (हिंदी)</option>
+                            <option value="es">Spanish (Español)</option>
+                            <option value="fr">French (Français)</option>
+                            <option value="de">German (Deutsch)</option>
+                            <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Voice Accent Selection -->
+                <div class="form-group">
+                    <label for="accent-select" id="accent-label">Select Voice Accent (English only)</label>
+                    <div class="select-wrapper">
+                        <select id="accent-select" name="accent">
+                            <option value="com">🇺🇸 US English (Default)</option>
+                            <option value="co.uk">🇬🇧 British English</option>
+                            <option value="co.in">🇮🇳 Indian English</option>
+                            <option value="com.au">🇦🇺 Australian English</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Translation Option -->
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: 15px;">
+                    <input type="checkbox" id="translate-check" name="translate"
+                        style="width: 20px; height: 20px; accent-color: var(--primary-color);">
+                    <label for="translate-check" id="translate-label"
+                        style="margin-bottom: 0; cursor: pointer;">Translate text to selected language?</label>
+                </div>
+
+                <!-- Drag and Drop Area -->
+                <div class="upload-area" id="drop-zone">
+                    <div class="icon-container">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3 id="drag-drop-text">Drag & Drop your PDF here</h3>
+                    <p id="or-text">or</p>
+                    <button type="button" class="btn-secondary" id="browse-btn">Browse Files</button>
+                    <input type="file" id="file-input" name="file" accept=".pdf" hidden>
+                    <p class="file-info" id="file-name"></p>
+                </div>
+
+                <!-- Action Button -->
+                <button type="submit" class="btn-primary" id="convert-btn" disabled>
+                    <span id="btn-text">Upload & Convert</span>
+                    <span class="loader hidden"></span>
+                </button>
+
+            </form>
+
+            <!-- Status Message -->
+            <div id="status-message" class="status-area hidden">
+                <i class="status-icon fas"></i>
+                <span class="status-text"></span>
+            </div>
+
+            <!-- Audio Player (Hidden by default) -->
+            <!-- Audio Player (Hidden by default) -->
+            <div id="audio-container" class="audio-area hidden">
+                <p>Listen to your audio:</p>
+
+                <div class="custom-audio-player">
+                    <!-- Top Row: Controls -->
+                    <div class="player-controls-row">
+                        <button type="button" id="rewind-btn" class="control-btn small-btn" title="Rewind 10s">
+                            <i class="fas fa-backward"></i>
+                        </button>
+
+                        <button type="button" id="custom-play-btn" class="play-btn" title="Play/Pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+
+                        <button type="button" id="forward-btn" class="control-btn small-btn" title="Forward 10s">
+                            <i class="fas fa-forward"></i>
+                        </button>
+                    </div>
+
+                    <!-- Bottom Row: Time, Slider, Speed -->
+                    <div class="player-timeline-row">
+                        <span id="time-display">0:00 / 0:00</span>
+                        <input type="range" id="seek-slider" max="100" value="0" class="seek-slider">
+                        <select id="speed-select" class="speed-control">
+                            <option value="0.5">0.5x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2x</option>
+                        </select>
+                    </div>
+                </div>
+
+                <audio id="audio-player">
+                    Your browser does not support the audio element.
+                </audio>
+
+                <a id="download-link" href="#" class="btn-secondary"
+                    style="display: block; text-align: center; margin-top: 15px; text-decoration: none;">
+                    <i class="fas fa-download"></i> Download MP3
+                </a>
+            </div>
+        </main>
+
+
+    </div>
+
+    <!-- Custom JS -->
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=3"></script>
+</body>
+
+</html>
