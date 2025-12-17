@@ -1,5 +1,0 @@
-flask
-werkzeug
-PyPDF2
-gTTS
-deep-translator
